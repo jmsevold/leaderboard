@@ -58,11 +58,13 @@ if (Meteor.isClient){
       'submit form': function(event){
           event.preventDefault();
           var playerNamevar = event.target.playerName.value;
+          var playerScore   = event.target.playerScore.value;
           PlayersList.insert({
             name: playerNamevar,
-            score: 0
+            score: playerScore
           });
           event.target.playerName.value = '';
+          event.target.playerScore.value = '';
       }
   });
 };
