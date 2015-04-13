@@ -1,10 +1,12 @@
 PlayersList = new Mongo.Collection('players');
 console.log('hello world');
 
+
+// Client helpers
 if (Meteor.isClient){
   Template.leaderboard.helpers({
     player: function(){
-      return PlayersList.find()
+      return PlayersList.find({},{sort: {score: -1, name: 1} })
     },
 
     otherFunction: function(){
@@ -17,11 +19,18 @@ if (Meteor.isClient){
       if (playerId == selectedPlayer) {
         return 'selected'
       }
+    },
+
+    'showSelectedPlayer': function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      return PlayersList.findOne(selectedPlayer)
     }
 
   });
 
 
+
+// Events
   Template.leaderboard.events({
 
     'click .player': function(){
@@ -31,8 +40,13 @@ if (Meteor.isClient){
 
     'click .increment': function(){
       var selectedPlayer = Session.get('selectedPlayer');
-      console.log(selectedPlayer);
-}
+      PlayersList.update(selectedPlayer, {$inc: {score: 5} });
+    },
+
+   'click .decrement': function(){
+     var selectedPlayer = Session.get('selectedPlayer');
+     PlayersList.update(selectedPlayer, {$inc: {score: -5} });
+   } 
 
   });
 };
