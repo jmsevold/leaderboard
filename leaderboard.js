@@ -25,12 +25,11 @@ if (Meteor.isClient){
       var selectedPlayer = Session.get('selectedPlayer');
       return PlayersList.findOne(selectedPlayer)
     }
-
   });
 
 
 
-// Events
+// Client Events
   Template.leaderboard.events({
 
     'click .player': function(){
@@ -48,6 +47,14 @@ if (Meteor.isClient){
      PlayersList.update(selectedPlayer, {$inc: {score: -5} });
    } 
 
+  });
+
+  Template.addPlayerForm.events({
+      'submit form': function(event){
+          event.preventDefault();
+          console.log("Form submitted");
+          console.log(event.type);
+      }
   });
 };
 
