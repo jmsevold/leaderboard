@@ -8,7 +8,10 @@
     {{> addPlayerForm}}
 </body>
 
+
+
 <template name="leaderboard">
+
 <ul>
   {{#each player}}
     <li class="player {{selectedClass}}"> {{name}} : {{score}}</li>
@@ -19,7 +22,12 @@
     <li>Selected Player: {{showSelectedPlayer.name}}</li>
   {{/if}}
  </ul>
+
+ <input type="button" class="remove" value="Remove Player">
+
 </template>
+
+
 
 <template name="addPlayerForm">
   <form>
