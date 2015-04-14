@@ -80,4 +80,9 @@ if (Meteor.isServer) {
     var currentUserId = this.userId;
     return PlayersList.find({createdBy: currentUserId})
   });
+  Meteor.methods({
+    'sendLogMessage': function(){
+      console.log('Hello World');
+    }
+  })
 };
