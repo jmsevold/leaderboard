@@ -63,14 +63,10 @@ if (Meteor.isClient){
           event.preventDefault();
           var playerNamevar = event.target.playerName.value;
           var playerScore   = event.target.playerScore.value;
-          var currentUserId = Meteor.userId();
-          PlayersList.insert({
-            name: playerNamevar,
-            score: playerScore,
-            createdBy: currentUserId
-          });
+        
           event.target.playerName.value = '';
           event.target.playerScore.value = '';
+          Meteor.call('insertPlayerData');
       }
   });
 };
@@ -80,9 +76,16 @@ if (Meteor.isServer) {
     var currentUserId = this.userId;
     return PlayersList.find({createdBy: currentUserId})
   });
+  
+
   Meteor.methods({
-    'sendLogMessage': function(){
-      console.log('Hello World');
-    }
-  })
+      'insertPlayerData': function(){
+          var currentUserId = Meteor.userId();
+          PlayersList.insert({
+            name: "David",
+            score: 0,
+            createdBy: currentUserId
+          });
+      }
+  });
 };
