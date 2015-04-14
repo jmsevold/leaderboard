@@ -61,7 +61,6 @@ if (Meteor.isClient){
           var playerNamevar = event.target.playerName.value;
           var playerScore   = event.target.playerScore.value;
           var currentUserId = Meteor.userId();
-          console.log(currentUserId);
           PlayersList.insert({
             name: playerNamevar,
             score: playerScore,
